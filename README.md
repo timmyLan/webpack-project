@@ -2,6 +2,10 @@ webpack-project
 ===============
 一个简单的webpack构建bootstrap自动化例子
 
+note
+-------
+请务必更新node.js (version>=5.x)
+
 start
 ---------
 * 复制项目

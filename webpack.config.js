@@ -2,11 +2,12 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
+const extractCSS = new ExtractTextPlugin('stylesheets/[name]-[contenthash].css');
 const isProduction = function () {
   return process.env.NODE_ENV === 'production';
 };
 const filename = "[name]-[hash].js";
+const devtool = isProduction()? 'eval' : 'source-map';
 let plugins = [
   new webpack.ProvidePlugin({
       $: "jquery",
@@ -42,7 +43,7 @@ if(isProduction()){
   plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 module.exports = {
-  devtool: "source-map",
+  devtool: devtool,
   entry:  {
     'main' : __dirname + "/app/main.js",
     'info' : __dirname + "/app/info.js"

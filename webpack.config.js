@@ -8,10 +8,13 @@ const isProduction = function () {
 };
 const filename = "[name]-[hash].js";
 const devtool = isProduction()? 'eval' : 'source-map';
+const APP_PATH = path.resolve(__dirname, 'app');
+const TEM_PATH = path.resolve(APP_PATH, 'src/assets');
 let plugins = [
   new webpack.ProvidePlugin({
       $: "jquery",
-      jQuery: "jquery"
+      jQuery: "jquery",
+      "window.jQuery": "jquery"
   }),
   extractCSS,
   new webpack.optimize.CommonsChunkPlugin({
@@ -21,14 +24,14 @@ let plugins = [
   new HtmlWebpackPlugin({
     path: 'public',
     filename: 'index.html',
-    template: 'app/src/assets/index.ejs'
+    template: path.resolve(TEM_PATH, 'index.ejs')
   }),
   new HtmlWebpackPlugin({
     path: 'public',
     filename: 'info.html',
     chunks: ['commons','info'],
     title: 'I console log info',
-    template: 'app/src/assets/info.ejs'
+    template: path.resolve(TEM_PATH, 'info.ejs')
   })
 ];
 if(isProduction()){
@@ -46,8 +49,8 @@ if(isProduction()){
 module.exports = {
   devtool: devtool,
   entry:  {
-    'main' : __dirname + "/app/main.js",
-    'info' : __dirname + "/app/info.js"
+    'main' : path.resolve(APP_PATH, "main.js"),
+    'info' : path.resolve(APP_PATH, "info.js")
   },
   output: {
     path: path.resolve(__dirname, "public"),

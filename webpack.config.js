@@ -18,7 +18,7 @@ let plugins = [
   new HtmlWebpackPlugin({
     path: 'public',
     filename: 'info.html',
-    chunks: ['info'],
+    chunks: ['commons','info'],
     template: 'app/src/assets/body.ejs'
   }),
   new webpack.optimize.CommonsChunkPlugin({

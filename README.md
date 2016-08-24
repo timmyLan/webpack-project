@@ -12,6 +12,10 @@ $ git clone https://github.com/timmyLan/webpack-project.git
 ```
 $ cd webpack-project && npm install
 ```
+* 全局安装rimraf(兼容linux,windows删除文件夹命令)
+```
+$ npm install rimraf -g
+```
 * 生产环境
 ```
 $ npm run build

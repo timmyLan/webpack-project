@@ -1,1 +1,0 @@
-webpackJsonp([0,2],[function(module,exports){eval("'use strict';\n\nconsole.log('I console some info');\n\n/*****************\n ** WEBPACK FOOTER\n ** ./app/info.js\n ** module id = 0\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./app/info.js?")}]);

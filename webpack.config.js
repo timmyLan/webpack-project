@@ -21,13 +21,14 @@ let plugins = [
   new HtmlWebpackPlugin({
     path: 'public',
     filename: 'index.html',
-    template: 'app/src/assets/body.ejs'
+    template: 'app/src/assets/index.ejs'
   }),
   new HtmlWebpackPlugin({
     path: 'public',
     filename: 'info.html',
     chunks: ['commons','info'],
-    template: 'app/src/assets/body.ejs'
+    title: 'I console log info',
+    template: 'app/src/assets/info.ejs'
   })
 ];
 if(isProduction()){

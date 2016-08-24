@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
 const isProduction = function () {
   return process.env.NODE_ENV === 'production';
 };
@@ -9,6 +11,11 @@ let plugins = [
   new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery"
+  }),
+  extractCSS,
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'commons',
+    filename: 'js/commons.js',
   }),
   new HtmlWebpackPlugin({
     path: 'public',
@@ -20,10 +27,6 @@ let plugins = [
     filename: 'info.html',
     chunks: ['commons','info'],
     template: 'app/src/assets/body.ejs'
-  }),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'commons',
-    filename: 'js/commons.js',
   })
 ];
 if(isProduction()){
@@ -39,7 +42,7 @@ if(isProduction()){
   plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 module.exports = {
-  devtool: 'eval',
+  devtool: "source-map",
   entry:  {
     'main' : __dirname + "/app/main.js",
     'info' : __dirname + "/app/info.js"
@@ -61,7 +64,7 @@ module.exports = {
       },
       {
        test: /\.scss$/,
-       loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+       loader: extractCSS.extract(["css-loader?sourceMap", "sass"])
       },
       { test: /\.(woff|woff2)$/,  loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf$/,    loader: "file-loader" },

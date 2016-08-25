@@ -9,7 +9,7 @@ const isProduction = function () {
 const filename = "[name]-[hash].js";
 const devtool = isProduction()? 'eval' : 'source-map';
 const APP_PATH = path.resolve(__dirname, 'app');
-const TEM_PATH = path.resolve(APP_PATH, 'src/assets');
+const TEM_PATH = path.resolve(APP_PATH, 'src/templates');
 let plugins = [
   new webpack.ProvidePlugin({
       $: "jquery",
@@ -55,6 +55,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "public"),
     filename: filename
+  },
+  resolve: {
+    alias: {
+      'bootstrapTable':'bootstrap-table/dist/bootstrap-table'
+    }
   },
   module:{
     loaders:[
